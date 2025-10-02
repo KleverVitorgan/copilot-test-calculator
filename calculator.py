@@ -1,5 +1,5 @@
 """
-Simple Python calculator with basic arithmetic operations.
+Simple calculator module with basic arithmetic operations.
 """
 
 
