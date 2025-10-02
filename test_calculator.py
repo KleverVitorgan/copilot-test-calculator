@@ -1,5 +1,5 @@
 """
-Tests for calculator module.
+Unit tests for the calculator module.
 """
 import unittest
 from calculator import add, subtract, multiply, divide
