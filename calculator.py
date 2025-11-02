@@ -25,6 +25,33 @@ def divide(a, b):
     return a / b
 
 
+def calculate(num1, operator, num2):
+    """
+    Perform calculation based on operator.
+    
+    Args:
+        num1: First number
+        operator: Operation to perform (+, -, *, /)
+        num2: Second number
+        
+    Returns:
+        Result of the calculation
+        
+    Raises:
+        ValueError: If operator is unknown or division by zero
+    """
+    if operator == '+':
+        return add(num1, num2)
+    elif operator == '-':
+        return subtract(num1, num2)
+    elif operator == '*':
+        return multiply(num1, num2)
+    elif operator == '/':
+        return divide(num1, num2)
+    else:
+        raise ValueError(f"Unknown operator '{operator}'. Use +, -, *, or /")
+
+
 def main():
     """Command-line interface for the calculator."""
     print("=== Simple Calculator ===")
@@ -57,18 +84,7 @@ def main():
                 continue
             
             # Perform calculation
-            if operator == '+':
-                result = add(num1, num2)
-            elif operator == '-':
-                result = subtract(num1, num2)
-            elif operator == '*':
-                result = multiply(num1, num2)
-            elif operator == '/':
-                result = divide(num1, num2)
-            else:
-                print(f"Error: Unknown operator '{operator}'. Use +, -, *, or /")
-                continue
-            
+            result = calculate(num1, operator, num2)
             print(f"Result: {result}")
             
         except ValueError as e:

@@ -116,15 +116,7 @@ class CalculatorGUI:
         
         try:
             current = float(self.display.get())
-            
-            if self.operator == '+':
-                result = calculator.add(self.total, current)
-            elif self.operator == '-':
-                result = calculator.subtract(self.total, current)
-            elif self.operator == '*':
-                result = calculator.multiply(self.total, current)
-            elif self.operator == '/':
-                result = calculator.divide(self.total, current)
+            result = calculator.calculate(self.total, self.operator, current)
             
             # Display result
             self.display.delete(0, tk.END)
@@ -137,29 +129,31 @@ class CalculatorGUI:
             self.operator = None
             self.reset_display = True
             
-        except ValueError as e:
-            self.display.delete(0, tk.END)
-            self.display.insert(0, "Error")
-            self.operator = None
-            self.reset_display = True
-        except Exception as e:
-            self.display.delete(0, tk.END)
-            self.display.insert(0, "Error")
-            self.operator = None
-            self.reset_display = True
+        except (ValueError, Exception):
+            self._show_error()
+    
+    def _show_error(self):
+        """Display error message and reset operator state."""
+        self.display.delete(0, tk.END)
+        self.display.insert(0, "Error")
+        self.operator = None
+        self.reset_display = True
+    
+    def _clear_display(self):
+        """Clear the display and show 0."""
+        self.display.delete(0, tk.END)
+        self.display.insert(0, "0")
     
     def clear_all(self):
         """Clear all (C button)."""
-        self.display.delete(0, tk.END)
-        self.display.insert(0, "0")
+        self._clear_display()
         self.total = 0
         self.operator = None
         self.reset_display = False
     
     def clear_entry(self):
         """Clear entry (CE button)."""
-        self.display.delete(0, tk.END)
-        self.display.insert(0, "0")
+        self._clear_display()
 
 
 def main():
