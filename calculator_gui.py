@@ -129,7 +129,7 @@ class CalculatorGUI:
             self.operator = None
             self.reset_display = True
             
-        except (ValueError, Exception):
+        except Exception:
             self._show_error()
     
     def _show_error(self):
